@@ -3,8 +3,8 @@
 This repository builds the CrabXL documentation site with
 [Fumadocs](https://fumadocs.dev). It does not contain the language
 documentation itself. Each source repository keeps its documentation in its own
-`docs/` folder. This repository copies those folders, checks them, builds a
-static site and deploys it to Cloudflare Pages.
+`docs/` folder. This repository copies those folders, checks them and builds a
+static site. Cloudflare Pages builds and serves it.
 
 | Section | Source |
 |---|---|
@@ -21,7 +21,8 @@ static site and deploys it to Cloudflare Pages.
 | `scripts/check-content.mjs` | Checks a folder against the [content specification](CONTENT-SPEC.md). |
 | `content/docs/` | Pages that this repository owns: the overview. |
 | `.vale.ini`, `styles/` | Writing checks. See [WRITING.md](WRITING.md). |
-| `.github/workflows/deploy.yml` | Builds and deploys the site. |
+| `.github/workflows/ci.yml` | Checks and builds the site on each push and pull request. |
+| `.github/workflows/rebuild.yml` | Starts a daily rebuild on Cloudflare Pages. |
 | `.github/workflows/check-docs.yml` | Reusable check for the `docs/` folder of a source repository. |
 
 ## Build the site on your computer
@@ -47,30 +48,42 @@ npm run fetch -- --local rust=../crabxl/docs --local python=../crabxl-python/doc
 
 ## Deployment
 
-GitHub Actions builds the site and deploys the `out/` folder to Cloudflare
-Pages with Direct Upload. Cloudflare does not build the site.
+Cloudflare Pages builds the site from this repository with its Git
+integration. It builds on each push to `main` and makes a preview for each
+other branch and pull request.
 
-The workflow runs:
+A rebuild is also necessary when a source repository changes its `docs/`
+folder. Two mechanisms start it:
 
-- On a push to `main`.
-- When a source repository sends a `docs-updated` event.
-- Every day, to include changes that did not send an event.
-- On a pull request. A pull request from this repository gets a preview URL.
+- Each source repository calls a Cloudflare deploy hook after a push that
+  changes `docs/`.
+- `.github/workflows/rebuild.yml` calls the deploy hook every day. This
+  includes changes that did not call the hook.
 
-### Configuration
+### Cloudflare Pages settings
 
-Set these in **Settings → Secrets and variables → Actions** of this repository:
+Connect this repository to a new Pages project and use these build settings:
 
-| Name | Type | Value |
-|---|---|---|
-| `CLOUDFLARE_API_TOKEN` | Secret | An API token with the **Cloudflare Pages: Edit** permission. |
-| `CLOUDFLARE_ACCOUNT_ID` | Secret | The Cloudflare account ID. |
-| `CLOUDFLARE_PAGES_PROJECT` | Variable | The Pages project name. The default is `crabxl-docs`. |
-| `SITE_URL` | Variable | The public URL of the site. The default is `https://crabxl-docs.pages.dev`. |
+| Setting | Value |
+|---|---|
+| Framework preset | None |
+| Production branch | `main` |
+| Build command | `npm run build:pages` |
+| Build output directory | `out` |
+| Environment variable `SITE_URL` | The public URL of the site, for example `https://crabxl-docs.pages.dev`. |
 
-Create the Pages project as a **Direct Upload** project. Do not connect it to
-Git. If the secrets are not set, the workflow builds the site but does not
-deploy it.
+`.node-version` selects Node.js 22. `npm run build:pages` fetches the source
+folders, checks them and builds the site.
+
+### Deploy hook
+
+1. In the Pages project, go to **Settings → Builds → Deploy hooks**.
+2. Add a hook for the `main` branch.
+3. Store the hook URL as an Actions secret:
+   - `CLOUDFLARE_DEPLOY_HOOK` in this repository.
+   - `DOCS_DEPLOY_HOOK` in each source repository.
+
+If a secret is not set, the workflow that uses it does nothing.
 
 ## Add a source
 
