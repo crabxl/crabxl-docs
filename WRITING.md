@@ -9,26 +9,30 @@ messages and commit messages in all CrabXL repositories.
 
 ## Rules
 
-1. **Write short sentences.** Use a maximum of 20 words in an instruction and
+1. **Write only information that the reader uses.** Each sentence must give a
+   fact, an instruction or a limit. Do not write slogans, praise, thanks or
+   text about the text ("This guide tells you…"). Do not repeat a statement on
+   the same page.
+2. **Write short sentences.** Use a maximum of 20 words in an instruction and
    25 words in a description.
-2. **Give one instruction in each sentence.** Put a condition before the
+3. **Give one instruction in each sentence.** Put a condition before the
    instruction: "If the file is large, use streaming mode."
-3. **Use the imperative for instructions.** Write "Open the file", not "The
+4. **Use the imperative for instructions.** Write "Open the file", not "The
    file should be opened".
-4. **Use the active voice.** Write "The reader returns a row", not "A row is
+5. **Use the active voice.** Write "The reader returns a row", not "A row is
    returned by the reader".
-5. **Use one word for one meaning.** Use the glossary term every time. Do not
+6. **Use one word for one meaning.** Use the glossary term every time. Do not
    use synonyms to vary the text.
-6. **Do not use unclear modal verbs.** Use "must" for a requirement and "can"
+7. **Do not use unclear modal verbs.** Use "must" for a requirement and "can"
    for a possibility. Do not use "should", "may", "might" or "could".
-7. **Do not put more than three nouns in a sequence.** Write "the limit for
+8. **Do not put more than three nouns in a sequence.** Write "the limit for
    shared strings", not "the shared string memory budget limit".
-8. **Write one topic in each paragraph.** Start the paragraph with the topic.
-9. **Use lists for steps and for items that the reader compares.**
-10. **Write for a new reader.** Do not use internal codes, such as milestone or
+9. **Write one topic in each paragraph.** Start the paragraph with the topic.
+10. **Use lists for steps and for items that the reader compares.**
+11. **Write for a new reader.** Do not use internal codes, such as milestone or
     release codes, without a definition. Do not describe the history of the
     work.
-11. **Do not record conversations.** Do not write "the user approved". Write the
+12. **Do not record conversations.** Do not write "the user approved". Write the
     decision and its reason.
 
 ## Examples
@@ -37,6 +41,8 @@ messages and commit messages in all CrabXL repositories.
 |---|---|
 | Canonical bounded display-order updates are utilized. | CrabXL changes the sheet order. It does not load the cells. |
 | The workbook should be closed. | Close the workbook. |
+| The Rust core does the work. Each package uses the same core. | (Delete. It gives the reader no fact to use.) |
+| Thank you for your help. This guide tells you how to contribute. | (Delete. The heading already says this.) |
 | It may be necessary to increase the limit. | If the file is larger than the limit, increase the limit. |
 | On 2026-10-07 the user approved six releases. | The remaining work is in six releases. This reduces the packaging work. |
 
