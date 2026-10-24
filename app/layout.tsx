@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import './global.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.SITE_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(process.env.SITE_URL ?? 'https://docs.crabxl.com'),
   title: { template: '%s | CrabXL', default: 'CrabXL' },
   description: 'XLSX library for Rust and Python.',
 };

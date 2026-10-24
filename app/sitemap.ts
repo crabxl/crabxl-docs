@@ -3,7 +3,7 @@ import { source } from '@/lib/source';
 
 export const dynamic = 'force-static';
 
-const siteUrl = process.env.SITE_URL ?? 'http://localhost:3000';
+const siteUrl = process.env.SITE_URL ?? 'https://docs.crabxl.com';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ['/', ...source.getPages().map((page) => page.url)];
