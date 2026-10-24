@@ -1,0 +1,19 @@
+# Project glossary: use the approved term. See GLOSSARY.md.
+extends: substitution
+message: "Use '%s' instead of '%s'."
+level: error
+ignorecase: true
+swap:
+  'excel file': XLSX file
+  'spreadsheet file': XLSX file
+  'xlsx document': XLSX file
+  'utili[sz]e': use
+  'leverage': use
+  'in order to': to
+  'is able to': can
+  'are able to': can
+  'make use of': use
+  'prior to': before
+  'subsequently': then
+  'a number of': some
+  'functionality': capability
