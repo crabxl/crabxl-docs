@@ -82,8 +82,8 @@ their properties.
 
 ## Standard sections
 
-Each language section uses the same structure, so readers find the same
-information in each language. A section does not need all pages at the start.
+Each language section uses this structure. A section can start with some of the
+pages.
 
 | Page | Contents |
 |---|---|
