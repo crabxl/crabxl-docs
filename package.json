@@ -7,6 +7,7 @@
     "check": "node scripts/check-content.mjs content/docs",
     "dev": "next dev",
     "build": "next build",
+    "build:pages": "npm run fetch && npm run check && npm run build",
     "start": "serve out",
     "types:check": "next typegen && tsc --noEmit"
   },

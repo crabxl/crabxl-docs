@@ -11,22 +11,20 @@ Replace this file when the status changes. Do not append a history log.
   (`crabxl/crabxl-python`). Each source has only an introduction page.
 - The content checker and the Vale writing rules work. The reusable workflow
   `check-docs.yml` runs them in the source repositories.
-- The deploy workflow builds the site. It deploys only when the Cloudflare
-  secrets are set.
+- Cloudflare Pages builds the site with its Git integration. GitHub Actions
+  only checks the site and starts rebuilds.
 
 ## Configuration to do
 
-These steps need access to the accounts. An agent cannot do them.
+These steps need access to the accounts. An agent cannot do them. The
+[README](../README.md#deployment) gives the details.
 
-1. Create a Cloudflare Pages project with Direct Upload. The default name is
-   `crabxl-docs`.
-2. Add the secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` to this
-   repository. If the project has another name, add the variable
-   `CLOUDFLARE_PAGES_PROJECT`.
-3. If the site uses a custom domain, add the variable `SITE_URL`.
-4. Add the secret `DOCS_DISPATCH_TOKEN` to `crabxl/crabxl` and
-   `crabxl/crabxl-python`. See [CONTRIBUTING.md](../CONTRIBUTING.md#source-repository-workflow).
-   Without it, the daily build includes source changes.
+1. Connect this repository to a Cloudflare Pages project. Use the build
+   settings in the README.
+2. Create a deploy hook for `main`.
+3. Store the hook URL as the secret `CLOUDFLARE_DEPLOY_HOOK` in this
+   repository, and as `DOCS_DEPLOY_HOOK` in `crabxl/crabxl` and
+   `crabxl/crabxl-python`.
 
 ## Next tasks
 
@@ -52,8 +50,8 @@ In this repository:
 
 - Each source keeps its documentation next to its code. Changes to code and
   documentation are reviewed together.
-- GitHub Actions builds the site. Cloudflare Pages only serves the files.
-  This permits any build tool in CI, for example Python for API reference
-  generation.
+- Cloudflare Pages builds the site. The build needs only Node.js and Git.
+  Source repositories start rebuilds with a deploy hook. A hook URL can only
+  start a build, so it needs fewer permissions than a GitHub token.
 - The writing rules use the principles of ASD-STE100. The STE dictionary is not
   used. The project glossary replaces it.

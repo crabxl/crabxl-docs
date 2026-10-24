@@ -1,0 +1,38 @@
+# Checks only. Cloudflare Pages builds and deploys the site from this repository.
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  VALE_VERSION: 3.25.1
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm ci
+      - name: Fetch documentation from the source repositories
+        run: npm run fetch
+      - name: Check the content specification
+        run: npm run check
+      - name: Install Vale
+        run: |
+          curl -sSL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" | tar xz -C "$RUNNER_TEMP" vale
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+      - name: Check the writing rules
+        run: vale content/docs
+      - name: Check types
+        run: npm run types:check
+      - name: Build the site
+        run: npm run build

@@ -41,8 +41,9 @@ and its reason.
 
 ## Rules for changes
 
-- Keep the site a static export. Cloudflare Pages serves the `out/` folder.
-  Do not add features that need a server.
+- Keep the site a static export. Cloudflare Pages builds it with
+  `npm run build:pages` and serves the `out/` folder. Do not add features that
+  need a server. The build must work in the Cloudflare Pages build image.
 - A change to the content specification, the checker, `.vale.ini` or `styles/`
   affects the CI of every source repository. Run `npm run fetch` and the
   checks before you push such a change.

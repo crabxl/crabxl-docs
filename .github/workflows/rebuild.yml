@@ -1,0 +1,25 @@
+# Cloudflare Pages rebuilds the site on each push to this repository, and
+# source repositories call the deploy hook when their docs/ folder changes.
+# This daily rebuild includes source changes that did not call the hook.
+name: Rebuild site
+
+on:
+  schedule:
+    - cron: '17 3 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the Cloudflare Pages deploy hook
+        env:
+          HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::notice::CLOUDFLARE_DEPLOY_HOOK is not set. No rebuild was started."
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK"
