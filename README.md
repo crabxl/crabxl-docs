@@ -70,7 +70,7 @@ Connect this repository to a new Pages project and use these build settings:
 | Production branch | `main` |
 | Build command | `npm run build:pages` |
 | Build output directory | `out` |
-| Environment variable `SITE_URL` | The public URL of the site, for example `https://crabxl-docs.pages.dev`. |
+| Environment variable `SITE_URL` | The public URL of the site, default is `https://docs.crabxl.com`. |
 
 `.node-version` selects Node.js 22. `npm run build:pages` fetches the source
 folders, checks them and builds the site.
