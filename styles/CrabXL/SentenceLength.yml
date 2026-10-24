@@ -1,0 +1,7 @@
+# STE: a maximum of 20 words in a procedural sentence and 25 in a descriptive sentence.
+extends: occurrence
+message: "Make this sentence shorter. Use a maximum of 25 words (20 in an instruction)."
+level: warning
+scope: sentence
+max: 25
+token: '\b[\w.-]+\b'

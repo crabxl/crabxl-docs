@@ -1,0 +1,10 @@
+# STE: one word has one meaning. "Should", "may", "might" and "could" are not clear.
+extends: existence
+message: "'%s' is not clear. Use 'must' for a requirement or 'can' for a possibility."
+level: warning
+ignorecase: true
+tokens:
+  - should
+  - may
+  - might
+  - could

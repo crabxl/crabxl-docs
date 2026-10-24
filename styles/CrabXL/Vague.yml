@@ -1,0 +1,16 @@
+# STE: use words with one clear meaning. Do not use words that only add emphasis.
+extends: existence
+message: "Remove or replace '%s'. It adds no clear meaning."
+level: warning
+ignorecase: true
+tokens:
+  - simply
+  - just
+  - easily
+  - obviously
+  - basically
+  - actually
+  - really
+  - very
+  - etc
+  - canonical

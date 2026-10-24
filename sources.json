@@ -1,0 +1,21 @@
+{
+  "$comment": "Repositories whose docs/ folder is published. Each source becomes a sidebar tab at /docs/<id>.",
+  "sources": [
+    {
+      "id": "rust",
+      "title": "Rust",
+      "description": "The crabxl crate",
+      "repository": "crabxl/crabxl",
+      "ref": "main",
+      "path": "docs"
+    },
+    {
+      "id": "python",
+      "title": "Python",
+      "description": "The crabxl package for Python",
+      "repository": "crabxl/crabxl-python",
+      "ref": "main",
+      "path": "docs"
+    }
+  ]
+}

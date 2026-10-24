@@ -1,0 +1,8 @@
+# STE: use the active voice.
+extends: existence
+message: "'%s' looks like the passive voice. Use the active voice if you can."
+level: suggestion
+ignorecase: true
+raw:
+  - '\b(?:am|are|were|being|is|been|was|be)\b\s*'
+  - '(?:\w+ed|built|chosen|done|found|given|held|kept|known|made|read|run|seen|set|shown|taken|thrown|written)\b'
