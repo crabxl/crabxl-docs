@@ -16,7 +16,7 @@ Replace this file when the status changes. Do not append a history log.
 
 ## Configuration to do
 
-These steps need access to the accounts. An agent cannot do them. The
+These steps need access to the accounts. The
 [README](../README.md#deployment) gives the details.
 
 1. Connect this repository to a Cloudflare Pages project. Use the build
@@ -53,5 +53,3 @@ In this repository:
 - Cloudflare Pages builds the site. The build needs only Node.js and Git.
   Source repositories start rebuilds with a deploy hook. A hook URL can only
   start a build, so it needs fewer permissions than a GitHub token.
-- The writing rules use the principles of ASD-STE100. The STE dictionary is not
-  used. The project glossary replaces it.

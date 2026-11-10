@@ -1,11 +1,8 @@
 # Writing rules
 
-CrabXL documentation follows the principles of ASD-STE100 (Simplified
-Technical English). We use the writing rules only. We do not use the STE
-dictionary. The [glossary](GLOSSARY.md) gives the approved project terms.
-
 These rules apply to user documentation, internal records, comments, error
-messages and commit messages in all CrabXL repositories.
+messages and commit messages in all CrabXL repositories. Use the terms in the
+[glossary](GLOSSARY.md).
 
 ## Rules
 
