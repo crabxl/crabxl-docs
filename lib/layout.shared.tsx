@@ -1,11 +1,18 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import { appName, gitConfig } from './shared';
+import { CrabMark } from '@/components/crab-mark';
+import { gitConfig } from './shared';
 
 export function baseOptions(): BaseLayoutProps {
   return {
     nav: {
-      // JSX supported
-      title: appName,
+      title: (
+        <>
+          <CrabMark className="size-6 text-[#d2432c] dark:text-[#f0654c]" />
+          <span className="font-semibold">
+            Crab<span className="text-[#d2432c] dark:text-[#f0654c]">XL</span>
+          </span>
+        </>
+      ),
     },
     links: [
       { text: 'Rust', url: '/docs/rust', active: 'nested-url' },
