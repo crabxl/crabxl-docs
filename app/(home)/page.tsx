@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Card, Cards } from 'fumadocs-ui/components/card';
 import { BookOpenIcon, GlobeIcon, HistoryIcon, PackageIcon } from 'lucide-react';
+import { languageIcons } from '@/components/language-icons';
 import { source } from '@/lib/source';
 import { sources } from '@/lib/sources';
 
@@ -47,7 +48,7 @@ export default function HomePage() {
           {sources.map((item) => (
             <Card
               key={item.id}
-              icon={<PackageIcon />}
+              icon={languageIcons[item.id] ?? <PackageIcon />}
               title={item.title}
               description={source.getPage([item.id])?.data.description ?? item.description}
               href={`/docs/${item.id}`}
