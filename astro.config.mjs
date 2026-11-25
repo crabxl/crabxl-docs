@@ -7,6 +7,9 @@ export default defineConfig({
   site: process.env.SITE_URL ?? 'https://docs.crabxl.com',
   // Cloudflare Pages serves this folder
   outDir: './out',
+  // docs/python.html, so /docs/python answers without a redirect, as before
+  build: { format: 'file' },
+  trailingSlash: 'never',
   integrations: [
     fumadocs({
       components: './src/components/mdx.tsx',
