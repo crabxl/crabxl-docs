@@ -40,14 +40,14 @@ description: Stream the rows of a worksheet with bounded memory.
 
 A page can use only these components. The site provides them.
 
-| Component | Use |
-|---|---|
-| `Callout` | A note or a warning. |
-| `Cards`, `Card` | Links to other pages. |
-| `Tabs`, `Tab` | Alternatives, for example two platforms. |
-| `Steps`, `Step` | A procedure with numbered steps. |
-| `Accordions`, `Accordion` | Content that the reader can expand. |
-| `Files`, `File`, `Folder` | A file tree. |
+| Component                 | Use                                      |
+| ------------------------- | ---------------------------------------- |
+| `Callout`                 | A note or a warning.                     |
+| `Cards`, `Card`           | Links to other pages.                    |
+| `Tabs`, `Tab`             | Alternatives, for example two platforms. |
+| `Steps`, `Step`           | A procedure with numbered steps.         |
+| `Accordions`, `Accordion` | Content that the reader can expand.      |
+| `Files`, `File`, `Folder` | A file tree.                             |
 
 The [Fumadocs documentation](https://fumadocs.dev/docs/ui/components) describes
 their properties.
@@ -85,14 +85,14 @@ their properties.
 Each language section uses this structure. A section can start with some of the
 pages.
 
-| Page | Contents |
-|---|---|
-| `index` | What the package does, installation, a short example. |
-| `quick-start` | A complete first program: create, read and edit a workbook. |
-| `guide/` | Tasks: reading, writing, editing, styles, dates and formulas, memory, errors. |
-| `support` | Supported features, by read, create and edit. |
-| `migration` | Migration from the reference library (for example openpyxl), if there is one. |
-| `changelog` | A link to the changelog of the package. |
+| Page          | Contents                                                                      |
+| ------------- | ----------------------------------------------------------------------------- |
+| `index`       | What the package does, installation, a short example.                         |
+| `quick-start` | A complete first program: create, read and edit a workbook.                   |
+| `guide/`      | Tasks: reading, writing, editing, styles, dates and formulas, memory, errors. |
+| `support`     | Supported features, by read, create and edit.                                 |
+| `migration`   | Migration from the reference library (for example openpyxl), if there is one. |
+| `changelog`   | A link to the changelog of the package.                                       |
 
 ## Writing
 

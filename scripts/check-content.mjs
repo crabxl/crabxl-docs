@@ -125,7 +125,13 @@ function checkPage(file, docsRoot) {
       report(file, `link "${rawTarget}" goes outside the docs folder. Use a full URL.`);
       continue;
     }
-    const candidates = [resolved, `${resolved}.md`, `${resolved}.mdx`, path.join(resolved, 'index.md'), path.join(resolved, 'index.mdx')];
+    const candidates = [
+      resolved,
+      `${resolved}.md`,
+      `${resolved}.mdx`,
+      path.join(resolved, 'index.md'),
+      path.join(resolved, 'index.mdx'),
+    ];
     if (!candidates.some((candidate) => existsSync(candidate))) {
       report(file, `link "${rawTarget}" does not resolve`);
     }
@@ -139,7 +145,10 @@ export function checkFolder(folder) {
     return;
   }
   if (!existsSync(path.join(docsRoot, 'meta.json'))) report(folder, 'meta.json is missing');
-  if (!existsSync(path.join(docsRoot, 'index.md')) && !existsSync(path.join(docsRoot, 'index.mdx'))) {
+  if (
+    !existsSync(path.join(docsRoot, 'index.md')) &&
+    !existsSync(path.join(docsRoot, 'index.mdx'))
+  ) {
     report(folder, 'index.md or index.mdx is missing');
   }
   for (const file of walk(docsRoot)) {
@@ -147,13 +156,15 @@ export function checkFolder(folder) {
     const extension = path.extname(name);
     const stem = name.slice(0, name.length - extension.length);
     if (statSync(file).isDirectory()) {
-      if (!namePattern.test(name)) report(file, 'use lowercase letters, digits and hyphens in folder names');
+      if (!namePattern.test(name))
+        report(file, 'use lowercase letters, digits and hyphens in folder names');
       continue;
     }
     if (name === 'meta.json') {
       checkMeta(file, docsRoot);
     } else if (pageExtensions.has(extension)) {
-      if (!namePattern.test(stem)) report(file, 'use lowercase letters, digits and hyphens in file names');
+      if (!namePattern.test(stem))
+        report(file, 'use lowercase letters, digits and hyphens in file names');
       checkPage(file, docsRoot);
     } else if (!assetExtensions.has(extension)) {
       report(file, `file type "${extension || name}" is not permitted`);

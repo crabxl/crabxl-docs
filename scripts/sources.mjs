@@ -15,7 +15,8 @@ export function readSources() {
         throw new Error(`sources.json: "${key}" is missing in ${JSON.stringify(source)}`);
       }
     }
-    if (!/^[a-z][a-z0-9-]*$/.test(source.id)) throw new Error(`sources.json: invalid id "${source.id}"`);
+    if (!/^[a-z][a-z0-9-]*$/.test(source.id))
+      throw new Error(`sources.json: invalid id "${source.id}"`);
     if (ids.has(source.id)) throw new Error(`sources.json: duplicate id "${source.id}"`);
     ids.add(source.id);
   }

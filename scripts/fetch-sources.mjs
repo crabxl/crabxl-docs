@@ -37,7 +37,10 @@ for (const source of sources) {
   } else {
     const checkout = mkdtempSync(path.join(tmpdir(), `crabxl-docs-${source.id}-`));
     const url = `https://github.com/${source.repository}.git`;
-    const git = (...gitArgs) => execFileSync('git', gitArgs, { cwd: checkout, stdio: ['ignore', 'pipe', 'inherit'] }).toString().trim();
+    const git = (...gitArgs) =>
+      execFileSync('git', gitArgs, { cwd: checkout, stdio: ['ignore', 'pipe', 'inherit'] })
+        .toString()
+        .trim();
     try {
       git('init', '--quiet');
       git('remote', 'add', 'origin', url);
@@ -45,7 +48,10 @@ for (const source of sources) {
       git('fetch', '--quiet', '--depth=1', '--filter=blob:none', 'origin', source.ref);
       git('checkout', '--quiet', 'FETCH_HEAD');
       const folder = path.join(checkout, source.path);
-      if (!existsSync(folder)) throw new Error(`${source.id}: ${source.path}/ does not exist in ${source.repository}@${source.ref}`);
+      if (!existsSync(folder))
+        throw new Error(
+          `${source.id}: ${source.path}/ does not exist in ${source.repository}@${source.ref}`,
+        );
       cpSync(folder, target, { recursive: true });
       revisions[source.id] = { ...source, revision: git('rev-parse', 'HEAD') };
     } finally {
@@ -59,7 +65,11 @@ for (const source of sources) {
   const meta = JSON.parse(readFileSync(metaPath, 'utf8'));
   writeFileSync(
     metaPath,
-    JSON.stringify({ ...meta, title: source.title, description: source.description, root: true }, null, 2) + '\n',
+    JSON.stringify(
+      { ...meta, title: source.title, description: source.description, root: true },
+      null,
+      2,
+    ) + '\n',
   );
   console.log(`${source.id}: ${source.repository}@${revisions[source.id].revision}`);
 }

@@ -1,12 +1,12 @@
 # Status
 
-Last update: 2026-10-24.
+Last update: 2026-11-25.
 
 Replace this file when the status changes. Do not append a history log.
 
 ## Current state
 
-- The site builds as a static export with Fumadocs and Next.js.
+- The site builds as a static site with Fumadocs on Astro. The toolchain is Vite+ and pnpm.
 - `sources.json` lists two sources: Rust (`crabxl/crabxl`) and Python
   (`crabxl/crabxl-python`). Each source has only an introduction page.
 - The content checker and the Vale writing rules work. The reusable workflow

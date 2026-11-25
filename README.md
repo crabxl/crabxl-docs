@@ -1,49 +1,51 @@
 # CrabXL documentation site
 
 This repository builds the CrabXL documentation site with
-[Fumadocs](https://fumadocs.dev). It does not contain the language
+[Fumadocs](https://fumadocs.dev) on [Astro](https://astro.build). It does not contain the language
 documentation itself. Each source repository keeps its documentation in its own
 `docs/` folder. This repository copies those folders, checks them and builds a
 static site. Cloudflare Pages builds and serves it.
 
-| Section | Source |
-|---|---|
-| `/docs/rust` | [crabxl/crabxl](https://github.com/crabxl/crabxl) `docs/` |
-| `/docs/python` | [crabxl/crabxl-python](https://github.com/crabxl/crabxl-python) `docs/` |
-| `/docs` (overview) | `content/docs/` in this repository |
+| Section            | Source                                                                  |
+| ------------------ | ----------------------------------------------------------------------- |
+| `/docs/rust`       | [crabxl/crabxl](https://github.com/crabxl/crabxl) `docs/`               |
+| `/docs/python`     | [crabxl/crabxl-python](https://github.com/crabxl/crabxl-python) `docs/` |
+| `/docs` (overview) | `content/docs/` in this repository                                      |
 
 ## Contents
 
-| Path | Contents |
-|---|---|
-| `sources.json` | The source repositories. |
-| `scripts/fetch-sources.mjs` | Copies the `docs/` folder of each source to `content/docs/<id>`. |
-| `scripts/check-content.mjs` | Checks a folder against the [content specification](CONTENT-SPEC.md). |
-| `content/docs/` | Pages that this repository owns: the overview. |
-| `.vale.ini`, `styles/` | Writing checks. See [WRITING.md](WRITING.md). |
-| `.github/workflows/ci.yml` | Checks and builds the site on each push and pull request. |
-| `.github/workflows/rebuild.yml` | Starts a daily rebuild on Cloudflare Pages. |
-| `.github/workflows/check-docs.yml` | Reusable check for the `docs/` folder of a source repository. |
+| Path                               | Contents                                                                       |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| `sources.json`                     | The source repositories.                                                       |
+| `scripts/fetch-sources.mjs`        | Copies the `docs/` folder of each source to `content/docs/<id>`.               |
+| `scripts/prepare-content.mjs`      | Copies `content/docs` to `.content/docs` and turns `.md` links into page URLs. |
+| `scripts/check-content.mjs`        | Checks a folder against the [content specification](CONTENT-SPEC.md).          |
+| `content/docs/`                    | Pages that this repository owns: the overview.                                 |
+| `.vale.ini`, `styles/`             | Writing checks. See [WRITING.md](WRITING.md).                                  |
+| `.github/workflows/ci.yml`         | Checks and builds the site on each push and pull request.                      |
+| `.github/workflows/rebuild.yml`    | Starts a daily rebuild on Cloudflare Pages.                                    |
+| `.github/workflows/check-docs.yml` | Reusable check for the `docs/` folder of a source repository.                  |
 
 ## Build the site on your computer
 
-You need Node.js 22 or later.
+You need Node.js 22.23.4 or later and pnpm 10.
 
 ```sh
-npm ci
-npm run fetch
-npm run check
-npm run dev
+pnpm install
+pnpm run fetch
+pnpm run check
+pnpm run dev
 ```
 
-`npm run dev` starts a server at http://localhost:3000. `npm run build` writes
-the static site to `out/`.
+`pnpm run dev` starts a server at http://localhost:4321. `pnpm run build` writes
+the static site to `out/`. The toolchain is Vite+ (`vp`). `pnpm exec vp fmt`
+formats the code. `pnpm run types:check` checks the format, lint and types.
 
 To preview changes to a source repository before you push them, use a local
 folder:
 
 ```sh
-npm run fetch -- --local rust=../crabxl/docs --local python=../crabxl-python/docs
+pnpm run fetch --local rust=../crabxl/docs --local python=../crabxl-python/docs
 ```
 
 ## Deployment
@@ -64,15 +66,16 @@ folder. Two mechanisms start it:
 
 Connect this repository to a new Pages project and use these build settings:
 
-| Setting | Value |
-|---|---|
-| Framework preset | None |
-| Production branch | `main` |
-| Build command | `npm run build:pages` |
-| Build output directory | `out` |
+| Setting                         | Value                                                             |
+| ------------------------------- | ----------------------------------------------------------------- |
+| Framework preset                | None                                                              |
+| Production branch               | `main`                                                            |
+| Build command                   | `pnpm run build:pages`                                            |
+| Build output directory          | `out`                                                             |
 | Environment variable `SITE_URL` | The public URL of the site, default is `https://docs.crabxl.com`. |
 
-`.node-version` selects Node.js 22. `npm run build:pages` fetches the source
+`.node-version` selects Node.js 22.23.4. Cloudflare Pages installs with pnpm
+because of `pnpm-lock.yaml`. `pnpm run build:pages` fetches the source
 folders, checks them and builds the site.
 
 ### Deploy hook

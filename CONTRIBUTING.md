@@ -12,12 +12,12 @@ content specification, the writing rules or the glossary.
 
 ## Setup
 
-You need Node.js 22 or later.
+You need Node.js 22.23.4 or later and pnpm 10.
 
 ```sh
-npm ci
-npm run fetch
-npm run dev
+pnpm install
+pnpm run fetch
+pnpm run dev
 ```
 
 ## Checks
@@ -25,10 +25,11 @@ npm run dev
 Run these checks before you open a pull request:
 
 ```sh
-npm run check
+pnpm run check
 vale content/docs
-npm run types:check
-npm run build
+pnpm run types:check
+pnpm test
+pnpm run build
 ```
 
 [Install Vale](https://vale.sh/docs/install) to run the writing checks.

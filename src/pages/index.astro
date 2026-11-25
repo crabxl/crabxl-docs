@@ -1,0 +1,42 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { HomePage, type LinkItem } from '@/components/home';
+import { source } from '@/lib/source';
+import { sources } from '@/lib/sources';
+
+const languages: LinkItem[] = sources.map((item) => ({
+  id: item.id,
+  title: item.title,
+  description: source.getPage([item.id])?.data.description ?? item.description ?? '',
+  href: `/docs/${item.id}`,
+}));
+
+// The Python changelog is a page of this site, so only the Rust references are external
+const resources: LinkItem[] = [
+  {
+    title: 'Rust changelog',
+    description: 'Changes in each release of the crabxl crate.',
+    href: 'https://github.com/crabxl/crabxl/blob/main/CHANGELOG.md',
+  },
+  {
+    title: 'Rust API reference',
+    description: 'Types and functions of the crabxl crate on docs.rs.',
+    href: 'https://docs.rs/crabxl',
+  },
+  {
+    title: 'crabxl.com',
+    description: 'Installation, features and benchmarks.',
+    href: 'https://crabxl.com',
+  },
+];
+---
+
+<Layout description="Guides for the CrabXL XLSX library in Python and Rust.">
+  <HomePage
+    client:load
+    pathname={Astro.url.pathname}
+    params={Astro.params}
+    languages={languages}
+    resources={resources}
+  />
+</Layout>

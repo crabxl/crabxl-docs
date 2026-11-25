@@ -34,28 +34,28 @@ messages and commit messages in all CrabXL repositories. Use the terms in the
 
 ## Examples
 
-| Do not write | Write |
-|---|---|
-| Canonical bounded display-order updates are utilized. | CrabXL changes the sheet order. It does not load the cells. |
-| The workbook should be closed. | Close the workbook. |
-| The Rust core does the work. Each package uses the same core. | (Delete. It gives the reader no fact to use.) |
-| Thank you for your help. This guide tells you how to contribute. | (Delete. The heading already says this.) |
-| It may be necessary to increase the limit. | If the file is larger than the limit, increase the limit. |
-| On 2026-10-07 the user approved six releases. | The remaining work is in six releases. This reduces the packaging work. |
+| Do not write                                                     | Write                                                                   |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Canonical bounded display-order updates are utilized.            | CrabXL changes the sheet order. It does not load the cells.             |
+| The workbook should be closed.                                   | Close the workbook.                                                     |
+| The Rust core does the work. Each package uses the same core.    | (Delete. It gives the reader no fact to use.)                           |
+| Thank you for your help. This guide tells you how to contribute. | (Delete. The heading already says this.)                                |
+| It may be necessary to increase the limit.                       | If the file is larger than the limit, increase the limit.               |
+| On 2026-10-07 the user approved six releases.                    | The remaining work is in six releases. This reduces the packaging work. |
 
 ## Automatic checks
 
 [Vale](https://vale.sh) checks some of these rules. The configuration is in
 [.vale.ini](.vale.ini) and the rules are in [styles/CrabXL](styles/CrabXL):
 
-| Rule | Level | Checks |
-|---|---|---|
-| `SentenceLength` | warning | Sentences with more than 25 words. |
-| `Modals` | warning | "should", "may", "might" and "could". |
-| `Vague` | warning | Words that add no meaning, such as "simply" or "very". |
-| `Terms` | error | Terms that the glossary replaces. |
-| `Passive` | suggestion | Possible passive voice. |
-| `Vale.Spelling` | warning | Spelling. Add project words to `styles/config/vocabularies/CrabXL/accept.txt`. |
+| Rule             | Level      | Checks                                                                         |
+| ---------------- | ---------- | ------------------------------------------------------------------------------ |
+| `SentenceLength` | warning    | Sentences with more than 25 words.                                             |
+| `Modals`         | warning    | "should", "may", "might" and "could".                                          |
+| `Vague`          | warning    | Words that add no meaning, such as "simply" or "very".                         |
+| `Terms`          | error      | Terms that the glossary replaces.                                              |
+| `Passive`        | suggestion | Possible passive voice.                                                        |
+| `Vale.Spelling`  | warning    | Spelling. Add project words to `styles/config/vocabularies/CrabXL/accept.txt`. |
 
 Only errors stop CI. Review warnings and suggestions, but a reviewer can accept
 them when the text is clear.
