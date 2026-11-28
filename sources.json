@@ -4,7 +4,7 @@
     {
       "id": "python",
       "title": "Python",
-      "description": "The crabxl package for Python",
+      "description": "The crabxl and crabxl-openpyxl packages for Python",
       "repository": "crabxl/crabxl-python",
       "ref": "main",
       "path": "docs"
