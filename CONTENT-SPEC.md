@@ -9,8 +9,7 @@ The site copies that folder to `/docs/<id>`, where `<id>` comes from
 
 ## Folder
 
-- The folder contains only public user documentation. Put internal records in
-  `internal/` of the source repository.
+- The folder contains only public user documentation.
 - The folder has an `index.md` or `index.mdx` file. It is the first page of the
   section.
 - The folder has a `meta.json` file.
